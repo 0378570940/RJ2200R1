@@ -1,3 +1,3 @@
-import{greet, LESSON, greeting} from '../sử dụng model/main.js'
+import{greet, LESSON, greeting} from './main.js'
 alert(greet);
 alert(LESSON);
