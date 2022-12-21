@@ -7,3 +7,4 @@ function greeting(name, content){
 
 // xuất các biến từ hàm
 export {greet, LESSON, greeting}
+
