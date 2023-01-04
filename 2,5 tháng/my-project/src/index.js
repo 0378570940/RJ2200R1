@@ -1,16 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM, { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import BasicForm from './Components/BasicForm';
+// import SingupFormik from './Components/SingupFormik';
+import NewProductS from './Components/NewProductS';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 );
 
+// react 18.6
+// const container = document.getElementById('root')
+// const root = createRoot(container)
+// root.render(<NewProductS />)
 
 // // ----- Thực hành hiện thị tên của ban React Element tạo bởi JSX--------------
 // // khởi tạo biến mang tên giá trị

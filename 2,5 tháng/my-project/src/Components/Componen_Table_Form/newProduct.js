@@ -32,7 +32,7 @@ class NewProduct extends React.Component {
                 type="text"
                 class="form-control"
                 id="inputEmail3"
-                value={this.state.name}
+                value={this.props.productInfo.name}
               />
             </div>
           </div>
@@ -112,6 +112,32 @@ class NewProduct extends React.Component {
                 <label class="form-check-label" for="gridCheck4">
                   Không
                 </label>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">
+                Đơn vị tính
+              </label>
+              <div class="col-sm-10">
+                <select class="form-select" aria-label="Default select example" value={this.props.productInfo.unit}>
+                  <option selected>-- Chọn loại sản phảm --</option>
+                  <option value="1">Cái</option>
+                  <option value="2">Chiếc</option>
+                  <option value="3">Miếng</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">
+                Giá sản phẩm
+              </label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputPassword3"
+                  value={this.props.productInfo.price}
+                />
               </div>
             </div>
           </div>

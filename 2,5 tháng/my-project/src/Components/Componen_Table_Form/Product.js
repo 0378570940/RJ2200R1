@@ -1,4 +1,5 @@
 import React from "react";
+import FunctionComponentExample from "../FunctionComponentExample";
 
 class Product extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Product extends React.Component {
   editProduct(id) {
     this.props.editProduct(id);
   }
-  
+
   static defaultProps = {
     name: "hello",
   };
@@ -23,6 +24,7 @@ class Product extends React.Component {
         <div>
           {/* <h1>{this.props.name}</h1> */}
           <h3>Danh sách sản phẩm</h3>
+          <FunctionComponentExample />
           <table class="table">
             <thead>
               <tr>
@@ -36,14 +38,18 @@ class Product extends React.Component {
             <tbody>
               {this.props.productLis.map((item) => {
                 return (
-                  <tr>
+                  <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.name}</td>
                     <td>{item.price}</td>
                     <td>{item.unit}</td>
                     <td>
-                      <button onClick={this.deleteProduct(item.id)}>Xóa</button>
-                      <button onClick={this.editProduct(item.id)}>Edit</button>
+                      <button onClick={() => this.deleteProduct(item.id)}>
+                        Xóa
+                      </button>
+                      <button onClick={() => this.editProduct(item.id)}>
+                        Edit
+                      </button>
                     </td>
                   </tr>
                 );
