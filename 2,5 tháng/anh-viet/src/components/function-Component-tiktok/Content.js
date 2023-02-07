@@ -1,7 +1,6 @@
 import ProductUser from "./FunctionComponeent/ProductUser";
 import UserInfor from "./FunctionComponeent/UserInfor";
 import { useState } from "react";
-import { render } from "@testing-library/react";
 
 function Content() {
     const [productList, setProductList] = useState([
@@ -28,6 +27,9 @@ function Content() {
         },
     ])
 
+    const [product, setProduct] = useState()
+
+    // hàm xóa
     function deleteProductUser(id) {
         let arr = [...productList];
         let index = arr.findIndex(function (i) {
@@ -37,10 +39,36 @@ function Content() {
         setProductList(arr)
     }
 
+    // hàm sủa theo id
+    function editProductUser(id) {
+        let index = productList.findIndex(function (i) {
+            return i.id === id
+        })
+        const pro = productList[index]
+        setProduct(pro)
+    }
+
+    // hàm edit sang from input
+    function headlSingIn(products) {
+        debugger;
+        const maxId = Math.max(...productList.map(x => x.id))
+        products.id = maxId + 1;
+        setProductList([
+            ...productList, products
+        ])
+    }
+
     return (
         <div className="row">
-            <ProductUser productList={productList} deleteProductUser={deleteProductUser} />
-            <UserInfor />
+            <ProductUser
+                productList={productList}
+                deleteProductUser={deleteProductUser}
+                editProductUser={editProductUser}
+            />
+            <UserInfor
+                product={product}
+                headlSingIn={headlSingIn}
+            />
         </div>
     )
 }

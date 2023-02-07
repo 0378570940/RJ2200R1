@@ -71,6 +71,16 @@ class Content extends React.Component {
     })
   }
 
+  // sửa theo form sản phẩm
+  signIn = (products) => {
+    debugger;
+    const maxId = Math.max(...this.state.product.map((X) => X.id))
+    products.id = maxId + 1;
+    this.setState({
+      product: [...this.state.product, products]
+    })
+  }
+
   render() {
     return (
       <div class="row mt-3 overflow-hidden">
@@ -79,7 +89,11 @@ class Content extends React.Component {
           deleteProductUser={this.deleteProductUser}
           editProduct={this.editProduct}
         />
-        <UserInfor productInfos={this.state.productInfo} />
+        <UserInfor
+          productInfos={this.state.productInfo}
+          // tạo 1 props từ component cha chuyền sang UserInfor sang Component con
+          signIn={this.signIn}
+        />
       </div>
     );
   }

@@ -4,25 +4,44 @@ class NewProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "A",
-      status: "Đang đi học",
+      name: "",
+      code: "",
+      product: "",
+      promotion: "",
+      unit: "",
+      price: 0,
+      changeByInput: false,
     };
   }
 
   saveProduct = () => {
-    // this.props.saveProduct("Xin chào");
-    this.setState({
-      status:
-        this.state.status === "Đang đi học" ? "Đã nghỉ học" : "Đang đi học",
-    }); //chuyền vào 1 obj
+    this.props.saveProduct(this.state) // chuyền lại cho Component Cha
   };
+
+  // viết dưới dạng Arrow function
+  healdaChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+      changeByInput: true,
+    })
+  }
+
+  // sử dụng để edit từ table sang ô input
+  static getDerivedStateFromProps = (props, state) => {
+    if (!state.changeByInput)
+      return {
+        name: props.productInfo.name
+      }
+    return {
+      ...state, changeByInput: false,
+    }
+  }
 
   render() {
     return (
       <div class="col-md-5">
         <form>
           <h3>Thông tin sản phẩm</h3>
-          <h1>{this.state.status}</h1>
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">
               Tên sản phẩm
@@ -32,7 +51,9 @@ class NewProduct extends React.Component {
                 type="text"
                 class="form-control"
                 id="inputEmail3"
-                value={this.props.productInfo.name}
+                name="name"
+                value={this.state.name}
+                onChange={this.healdaChange}
               />
             </div>
           </div>
@@ -41,12 +62,13 @@ class NewProduct extends React.Component {
               Mã sản phẩm
             </label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPassword3" />
+              {/* trường name lấy giá trị */}
+              <input type="text" class="form-control" id="inputPassword3" name="code" value={this.state.code} onChange={this.healdaChange} />
             </div>
           </div>
 
           <fieldset class="row mb-3">
-            <legend class="col-form-label col-sm-2 pt-0">Loại sản phẩm</legend>
+            <legend class="col-form-label col-sm-2 pt-0"  >Loại sản phẩm</legend>
             <div class="col-sm-10">
               <div class="form-check">
                 <input
@@ -99,7 +121,7 @@ class NewProduct extends React.Component {
             </div>
           </fieldset>
           <div class="row mb-3">
-            <legend class="col-form-label col-sm-2 pt-0">Khuyến mãi</legend>
+            <legend class="col-form-label col-sm-2 pt-0" >Khuyến mãi</legend>
             <div class="col-sm-10 offset-sm-2">
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="radio1" />
@@ -119,7 +141,7 @@ class NewProduct extends React.Component {
                 Đơn vị tính
               </label>
               <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example" value={this.props.productInfo.unit}>
+                <select class="form-select" aria-label="Default select example" >
                   <option selected>-- Chọn loại sản phảm --</option>
                   <option value="1">Cái</option>
                   <option value="2">Chiếc</option>
@@ -133,10 +155,12 @@ class NewProduct extends React.Component {
               </label>
               <div class="col-sm-10">
                 <input
+                  name="price"
                   type="text"
                   class="form-control"
                   id="inputPassword3"
-                  value={this.props.productInfo.price}
+                  value={this.state.price}
+                  onChange={this.healdaChange}
                 />
               </div>
             </div>

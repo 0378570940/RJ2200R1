@@ -1,36 +1,18 @@
-import { render } from "@testing-library/react";
 import React from "react";
-import { useState } from "react";
 
-function ProductUser() {
-    // const [productUser, setProductUser] = useState(
-    //     [
-    //         {
-    //             id: 1,
-    //             name: "Nguyễn Văn A",
-    //             address: "Hà Nội",
-    //             unit: "1",
-    //             Content: "Tiktok cơ",
-    //         },
-    //         {
-    //             id: 2,
-    //             name: "Nguyễn Văn Kiên",
-    //             address: "Hà Nội",
-    //             unit: "2",
-    //             Content: "Tiktok cơ",
-    //         },
-    //         {
-    //             id: 3,
-    //             name: "Nguyễn Văn Dương",
-    //             address: "Hà Nội",
-    //             unit: "3",
-    //             Content: "Tiktok cơ",
-    //         },
-    //     ]
+function ProductUser(props) {
+    // const [productUsers, setProductUser] = useState(
     // )
-    // deleteProductUser = (id) => {
-    //     deleteProductUser(id)
-    // }
+
+    //hàm xóa theo id
+    function deleteProductUser(id) {
+        props.deleteProductUser(id) // chuyển từ Component con sang cha
+    }
+
+    //hàm sửa theo id
+    function editProductUser(id) {
+        props.editProductUser(id) // chuyển từ Component con sang cha
+    }
 
 
     return (
@@ -48,9 +30,9 @@ function ProductUser() {
                 </thead>
                 <tbody>
                     {
-                        productList.map((item) => {
+                        props.productList.map((item) => {
                             return (
-                                <tr class="">
+                                <tr class="" key={item.id}>
                                     <td class="table-dark">{item.id}</td>
                                     <td class="table-dark">{item.name}</td>
                                     <td class="table-dark">{item.address}</td>
@@ -58,7 +40,7 @@ function ProductUser() {
                                     <td class="table-dark">{item.Content}</td>
                                     <td>
                                         <button class="btn btn-light me-4 " onClick={() => deleteProductUser(item.id)}>Xóa </button>
-                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-warning" onClick={() => editProductUser(item.id)}>Edit</button>
                                     </td>
                                 </tr>
                             )

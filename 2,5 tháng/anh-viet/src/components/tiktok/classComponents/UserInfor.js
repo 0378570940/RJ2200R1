@@ -4,7 +4,36 @@ class UserInfor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
+      address: "",
+      product: "",
+      Unit: "",
+      Content: "",
+      changeByInput: false
+    }
+  }
 
+  // hàm Arrow function
+  hanldeChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+      changeByInput: true
+    })
+  }
+
+  // hàm sửa từ edit về input
+  signIn = () => {
+    this.props.signIn(this.state) //Chuyển sang Component cha
+  }
+
+  // sử dụng để edit từ table sang ô input
+  static getDerivedStateFromProps = (props, state) => {
+    if (!state.changeByInput)
+      return {
+        name: props.productInfos.name
+      }
+    return {
+      ...state, changeByInput: false
     }
   }
 
@@ -16,13 +45,21 @@ class UserInfor extends React.Component {
             <label for="inputEmail4" class="form-label">
               Tên Tiktok
             </label>
-            <input type="text" class="form-control" id="inputEmail4" value={this.props.productInfos.name} />
+            <input type="text" class="form-control" id="inputEmail4"
+              name="name"
+              value={this.state.name}
+              onChange={this.hanldeChange}
+            />
           </div>
           <div class="col-md-6">
             <label for="inputPassword4" class="form-label">
               Địa chỉ
             </label>
-            <input type="text" class="form-control" id="inputPassword4" value={this.props.productInfos.address} />
+            <input type="text" class="form-control" id="inputPassword4"
+              name="address"
+              value={this.state.address}
+              onChange={this.hanldeChange}
+            />
           </div>
           <div className="form-group row">
             <div className="col-md-4">
@@ -88,7 +125,7 @@ class UserInfor extends React.Component {
             ></textarea>
           </div>
           <div class="col-12">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" onClick={this.signIn}>
               Sign in
             </button>
           </div>

@@ -1,8 +1,28 @@
 import React from "react";
 import { useState } from "react";
 
-function UserInfor() {
-    const [userInfor, setUserInfor] = useState()
+function UserInfor(props) {
+    const [userInfor, setUserInfor] = useState(
+        {
+            name: "",
+            address: "",
+            product: "",
+            Unit: "",
+            Content: "",
+            changeByInput: false
+        }
+    )
+
+    const hanldeChange = (event) => {
+        setUserInfor({
+            ...userInfor, [event.target.name]: event.target.value
+        })
+    }
+
+    function headlSingIn() {
+        props.headlSingIn(...userInfor)
+    }
+
     return (
         <div class="col-md-5">
             <form class="row g-3">
@@ -10,13 +30,21 @@ function UserInfor() {
                     <label for="inputEmail4" class="form-label">
                         Tên Tiktok
                     </label>
-                    <input type="text" class="form-control" id="inputEmail4" />
+                    <input type="text" class="form-control" id="inputEmail4"
+                        name="name"
+                        value={userInfor.name}
+                        onChange={hanldeChange}
+                    />
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">
                         Địa chỉ
                     </label>
-                    <input type="text" class="form-control" id="inputPassword4" />
+                    <input type="text" class="form-control" id="inputPassword4"
+                        name="address"
+                        // value={userInfor.address}
+                        onChange={hanldeChange}
+                    />
                 </div>
                 <div className="form-group row">
                     <div className="col-md-4">
@@ -81,7 +109,7 @@ function UserInfor() {
                     ></textarea>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" onClick={headlSingIn}>
                         Sign in
                     </button>
                 </div>

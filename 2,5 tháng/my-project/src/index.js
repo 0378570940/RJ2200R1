@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM, { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import BasicForm from './Components/BasicForm';
 // import SingupFormik from './Components/SingupFormik';
-import NewProductS from './Components/NewProductS';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
